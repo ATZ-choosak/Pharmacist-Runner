@@ -27,6 +27,9 @@ public class Movement : MonoBehaviour
 
     float initCenterBox , initSizeYBox;
 
+    [SerializeField]
+    private float rayToGround = 0.1f;
+
     private void Start()
     {
        rb = GetComponent<Rigidbody>();
@@ -41,7 +44,7 @@ public class Movement : MonoBehaviour
         transform.Translate(Vector3.forward * runSpeed * Time.deltaTime);
 
         //jump Up
-        if (Input.GetKeyDown(KeyCode.Space) && IsGround)
+        if (Input.GetKeyDown(KeyCode.Space) && IsGround && !IsSlide)
         {
             rb.AddForce(Vector3.up * jump ,ForceMode.Impulse);
         }
@@ -63,11 +66,11 @@ public class Movement : MonoBehaviour
 
         animator.SetBool("IsJump" , Input.GetKeyDown(KeyCode.Space) && IsGround);
         animator.SetBool("IsGround" , IsGround);
-        animator.SetBool("IsSlide" , Input.GetKeyDown(KeyCode.LeftControl) && IsGround);
+        animator.SetBool("IsSlide" , IsSlide);
 
         RaycastHit hit;
 
-        IsGround = Physics.Raycast(transform.position + new Vector3(0, 0.5f , 0), Vector3.down , out hit , 1f , layer);
+        IsGround = Physics.Raycast(transform.position + new Vector3(0, 0.5f , 0), Vector3.down , out hit , rayToGround, layer);
 
         if (Input.GetKeyDown(KeyCode.A))
         {

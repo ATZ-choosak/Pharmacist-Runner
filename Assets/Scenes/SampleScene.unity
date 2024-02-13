@@ -14,19 +14,19 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
+  m_Fog: 1
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
+  m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogEnd: 90
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: fa95802f80bd745cfb5e9c89f7e22341, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.6196745, g: 0.92157805, b: 0.9758052, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,67 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &599142213
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5830983920461403872, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602277430821227610, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_Name
-      value: road_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602277430821227610, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2f3f75b58fbbe4e41b3166365250c62a, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +443,8 @@ MonoBehaviour:
   - {fileID: 7441220544764621705, guid: c46c1ec7b7687144cb9b35f2ea395899, type: 3}
   - {fileID: 4130733260343718851, guid: 954b6f2717cfd5344a814aa132bcdb88, type: 3}
   - {fileID: 6916181666344286125, guid: 6b8cc610401f1e34a8563e9c2e60c988, type: 3}
-  InitnumberRoad: 5
+  - {fileID: 929524444268059912, guid: e89910ddd7c752f44bc33db6ba26ed1b, type: 3}
+  InitnumberRoad: 25
 --- !u!1 &1695462916 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 00275a549547b504ab2866766c4019ab, type: 3}
@@ -527,16 +467,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47c1580c372bc144a60bb6882e6234e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 5
+  runSpeed: 15
   jump: 50
   layer:
     serializedVersion: 2
     m_Bits: 8
   IsGround: 1
   IsSlide: 0
-  maximunWay: 3
+  maximunWay: 1.5
   setCenterBox: 0.2
   setSizeYBox: 0.4
+  rayToGround: 0.51
 --- !u!65 &1695462920
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -667,4 +608,3 @@ SceneRoots:
   - {fileID: 1744842389}
   - {fileID: 963194228}
   - {fileID: 1152893430}
-  - {fileID: 599142213}
