@@ -13,30 +13,39 @@ public class Movement : MonoBehaviour
     private LayerMask layer;
 
     [SerializeField]
-    private bool IsGround , IsSlide;
+    private bool IsGround , IsSlide , Islook;
 
     [SerializeField]
     private float maximunWay = 3.0f;
 
     float currentWay = 0.0f;
 
-    BoxCollider boxCollider;
+    CapsuleCollider Collider;
 
     [SerializeField]
     private float setCenterBox, setSizeYBox;
 
-    float initCenterBox , initSizeYBox;
+    float initCenterBox , initSizeYBox , stateLook;
 
     [SerializeField]
     private float rayToGround = 0.1f;
 
+
     private void Start()
     {
        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider>();
-        initCenterBox = boxCollider.center.y;
-        initSizeYBox = boxCollider.size.y;
+       animator = GetComponent<Animator>();
+       Collider = GetComponent<CapsuleCollider>();
+       initCenterBox = Collider.center.y;
+       initSizeYBox = Collider.height;
+       InvokeRepeating("randomLook" , 1.0f , 5.0f);
+    }
+
+    void randomLook()
+    {
+
+        Islook = Random.Range(0 , 5) == 3 ? true : false;
+        
     }
 
     void Update()
@@ -58,8 +67,8 @@ public class Movement : MonoBehaviour
         //Slide
         if (Input.GetKeyDown(KeyCode.LeftControl) && IsGround && !IsSlide)
         {
-            boxCollider.center = new Vector3(0 , setCenterBox , 0);
-            boxCollider.size = new Vector3(1 , setSizeYBox , 1);
+            Collider.center = new Vector3(0 , setCenterBox , 0);
+            Collider.height = setSizeYBox;
             Invoke("resetBox" , 1.0f);
             IsSlide = true;
         }
@@ -68,9 +77,13 @@ public class Movement : MonoBehaviour
         animator.SetBool("IsGround" , IsGround);
         animator.SetBool("IsSlide" , IsSlide);
 
-        RaycastHit hit;
+        stateLook = Mathf.Lerp(stateLook , Islook ? 1.0f : 0.0f , 10.0f * Time.deltaTime);
+        animator.SetFloat("look" , stateLook);
 
-        IsGround = Physics.Raycast(transform.position + new Vector3(0, 0.5f , 0), Vector3.down , out hit , rayToGround, layer);
+
+        //RaycastHit hit;
+
+        //IsGround = Physics.Raycast(transform.position + new Vector3(0, 0.5f , 0), Vector3.down , out hit , rayToGround, layer);
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -88,10 +101,21 @@ public class Movement : MonoBehaviour
 
     }
 
+
+    private void OnCollisionStay(Collision collision)
+    {
+        IsGround = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        IsGround = false;
+    }
+
     void resetBox()
     {
-        boxCollider.center = new Vector3(0, initCenterBox, 0);
-        boxCollider.size = new Vector3(1, initSizeYBox, 1);
+        Collider.center = new Vector3(0, initCenterBox, 0);
+        Collider.height = initSizeYBox;
         IsSlide = false;
     }
 }
