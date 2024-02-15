@@ -2028,6 +2028,7 @@ MonoBehaviour:
   - {x: 2, y: 0.58, z: -5}
   - {x: -2, y: 0.58, z: -5}
   box: {fileID: 3832569444156030686, guid: 4e9d562617503164fb9c86012738821d, type: 3}
+  type: 0
 --- !u!1001 &6536244842047131807
 PrefabInstance:
   m_ObjectHideFlags: 0

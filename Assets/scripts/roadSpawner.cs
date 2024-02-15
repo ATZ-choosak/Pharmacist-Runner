@@ -14,6 +14,7 @@ public class roadSpawner : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        nextSpawnPoint = transform.position;
     }
 
     public void SpawnTile()

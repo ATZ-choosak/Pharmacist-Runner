@@ -60,9 +60,15 @@ public class Movement : MonoBehaviour
         IsDead = b;
     }
 
+    float calculate_speedByscore()
+    {
+        return (scoreManager.instance.score > 0.0f ? scoreManager.instance.score : 1.0f) / 1000.0f;
+    }
+
     void Update()
     {
-        transform.Translate(Vector3.forward * runSpeed * Time.deltaTime);
+
+        transform.Translate(Vector3.forward * (runSpeed + calculate_speedByscore()) * Time.deltaTime);
 
         //jump Up
         if (Input.GetKeyDown(KeyCode.Space) && IsGround && !IsSlide)
