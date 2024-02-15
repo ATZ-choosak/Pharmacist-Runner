@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class randomBox : MonoBehaviour
 {
+    enum Type {box , police_stand};
+
     [SerializeField]
     private List<Vector3> pointSpawn = new List<Vector3>();
 
     [SerializeField]
     private GameObject box;
+
+    [SerializeField]
+    private Type type = Type.box;
+
     void Start()
     {
         int random_box_count = randomLength(4);
@@ -25,7 +31,19 @@ public class randomBox : MonoBehaviour
 
     void spawnBox(Vector3 pos)
     {
-        GameObject new_box = Instantiate(box , Vector3.zero , Quaternion.Euler(new Vector3(-90 , 180 , 0)));
+        Vector3 rotaion = Vector3.zero;
+
+        if (type == Type.box)
+        {
+            rotaion = new Vector3(-90, 180, 0);
+        }
+
+        if (type == Type.police_stand)
+        {
+            rotaion = new Vector3(0, 180, 0);
+        }
+
+        GameObject new_box = Instantiate(box , Vector3.zero , Quaternion.Euler(rotaion));
         new_box.transform.SetParent(this.transform);
         new_box.transform.localPosition = pos;
     }
