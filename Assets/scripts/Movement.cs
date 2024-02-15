@@ -30,6 +30,8 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float rayToGround = 0.1f;
 
+    bool IsDead = false;
+
 
     private void Start()
     {
@@ -46,6 +48,16 @@ public class Movement : MonoBehaviour
 
         Islook = Random.Range(0 , 5) == 3 ? true : false;
         
+    }
+
+    public void setRunSpeed(float speed)
+    {
+        runSpeed = speed;
+    }
+
+    public void setDead(bool b)
+    {
+        IsDead = b;
     }
 
     void Update()
@@ -85,15 +97,19 @@ public class Movement : MonoBehaviour
 
         IsGround = Physics.Raycast(transform.position + new Vector3(0, 0.5f , 0), Vector3.down , out hit , rayToGround, layer);
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (!IsDead)
         {
-            currentWay -= maximunWay;
-        }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                currentWay -= maximunWay;
+            }
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            currentWay += maximunWay;
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                currentWay += maximunWay;
+            }
         }
+        
 
         currentWay = Mathf.Clamp(currentWay , -maximunWay , maximunWay);
 
