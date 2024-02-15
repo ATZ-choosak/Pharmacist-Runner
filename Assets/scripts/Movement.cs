@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour
         //jump Down
         if (Input.GetKeyDown(KeyCode.LeftControl) && !IsGround)
         {
-            rb.AddForce(Vector3.down * jump, ForceMode.Impulse);
+            rb.AddForce(Vector3.down * jump * 2, ForceMode.Impulse);
         }
 
         //Slide
@@ -81,9 +81,9 @@ public class Movement : MonoBehaviour
         animator.SetFloat("look" , stateLook);
 
 
-        //RaycastHit hit;
+        RaycastHit hit;
 
-        //IsGround = Physics.Raycast(transform.position + new Vector3(0, 0.5f , 0), Vector3.down , out hit , rayToGround, layer);
+        IsGround = Physics.Raycast(transform.position + new Vector3(0, 0.5f , 0), Vector3.down , out hit , rayToGround, layer);
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -104,12 +104,12 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        IsGround = true;
+        //IsGround = true;
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        IsGround = false;
+        //IsGround = false;
     }
 
     void resetBox()
