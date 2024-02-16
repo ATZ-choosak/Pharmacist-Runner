@@ -1606,6 +1606,7 @@ MonoBehaviour:
   setCenterBox: 0.32
   setSizeYBox: 0.64
   rayToGround: 1
+  IsDead: 0
   jump_buff: 0
   speed_buff: 0
   jump_buff_obj: {fileID: 8998189890943715603}
@@ -1657,9 +1658,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.32
-  m_Height: 2
+  m_Height: 2.2472928
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.1236464, z: 0}
 --- !u!114 &3262711927155896789
 MonoBehaviour:
   m_ObjectHideFlags: 0
