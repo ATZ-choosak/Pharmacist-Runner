@@ -4,26 +4,60 @@ using UnityEngine;
 
 public class BoxDamage : MonoBehaviour
 {
+    MeshCollider meshCollider;
+    BoxCollider boxCollider;
+
+    private void Start()
+    {
+        if (GetComponent<MeshCollider>())
+        {
+            meshCollider = GetComponent<MeshCollider>();
+        }
+
+        if (GetComponent<BoxCollider>())
+        {
+            boxCollider = GetComponent<BoxCollider>();
+        }
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (!scoreManager.instance.movement.speed_buff)
         {
-            foreach (ContactPoint contact in collision.contacts)
+            if (collision.transform.CompareTag("Player"))
             {
-                // Check the normal of each contact point
-                if (contact.normal.y > 0)
+                foreach (ContactPoint contact in collision.contacts)
                 {
-                    Animator animator = collision.transform.GetComponent<Animator>();
-                    ragdollSystem ragdoll = collision.transform.GetComponent<ragdollSystem>();
-                    Movement movement = collision.transform.GetComponent<Movement>();
+                    // Check the normal of each contact point
+                    if (contact.normal.y > 0)
+                    {
+                        Animator animator = collision.transform.GetComponent<Animator>();
+                        ragdollSystem ragdoll = collision.transform.GetComponent<ragdollSystem>();
+                        Movement movement = collision.transform.GetComponent<Movement>();
 
-                    movement.setRunSpeed(0);
-                    animator.enabled = false;
-                    ragdoll.enableRagdoll();
+                        movement.setRunSpeed(0);
+                        animator.enabled = false;
+                        ragdoll.enableRagdoll();
+                    }
+
                 }
-                
             }
         }
         
+    }
+
+    private void FixedUpdate()
+    {
+        if (meshCollider)
+        {
+            meshCollider.enabled = !scoreManager.instance.movement.speed_buff;
+        }
+
+        if (boxCollider)
+        {
+            boxCollider.enabled = !scoreManager.instance.movement.speed_buff;
+        }
+
     }
 }

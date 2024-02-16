@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class item : MonoBehaviour
 {
-    enum ItemType { bag , jump_boot };
+    public enum ItemType { bag , jump_boot , speed_boot };
 
-    [SerializeField]
-    private ItemType type;
+    public ItemType type;
     
-    ItemType getType()
-    {
-        return type;
-    }
-
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
         {
-            scoreManager.instance.addScore(10);
-            Destroy(this.gameObject);
+            if (type == ItemType.bag)
+            {
+                scoreManager.instance.addScore(10);
+                Destroy(this.gameObject);
+            }
+
+            if (type == ItemType.jump_boot && !scoreManager.instance.movement.jump_buff)
+            {
+                scoreManager.instance.buff_jump();
+                Destroy(this.gameObject);
+            }
+
+            if (type == ItemType.speed_boot && !scoreManager.instance.movement.speed_buff)
+            {
+                scoreManager.instance.buff_speed();
+                Destroy(this.gameObject);
+            }
+
+
         }
     }
 

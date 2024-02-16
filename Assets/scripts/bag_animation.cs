@@ -12,16 +12,22 @@ public class bag_animation : MonoBehaviour
 
     private Vector3 initPos;
 
+    item item;
+
     void Start()
     {
         startTime = Time.time;
         initPos = transform.localPosition;
+
+        item = GetComponent<item>();
     }
 
     void Update()
     {
+        bool Is_boot = item.type == item.ItemType.jump_boot;
+
         float yPos = Mathf.Sin((Time.time - startTime) * frequency) * amplitude;
-        transform.localPosition = initPos + Vector3.forward * yPos;
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        transform.localPosition = initPos + (Is_boot ? Vector3.up : Vector3.forward) * yPos;
+        transform.Rotate((Is_boot ? Vector3.up : Vector3.forward) * rotationSpeed * Time.deltaTime);
     }
 }

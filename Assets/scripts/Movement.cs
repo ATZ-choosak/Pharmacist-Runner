@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField]
-    private float runSpeed = 0.1f , jump = 1.0f;
+
+    public float runSpeed = 0.1f , jump = 1.0f;
     Rigidbody rb;
     Animator animator;
 
@@ -30,17 +30,55 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float rayToGround = 0.1f;
 
-    bool IsDead = false;
+    public bool IsDead = false;
+
+    public bool jump_buff = false , speed_buff = false;
+
+    [SerializeField]
+    private GameObject jump_buff_obj , speed_buff_obj;
 
 
     private void Start()
     {
+       jump_buff_obj.SetActive(false);
+       speed_buff_obj.SetActive(false);
        rb = GetComponent<Rigidbody>();
        animator = GetComponent<Animator>();
        Collider = GetComponent<CapsuleCollider>();
        initCenterBox = Collider.center.y;
        initSizeYBox = Collider.height;
        InvokeRepeating("randomLook" , 1.0f , 5.0f);
+    }
+
+    public void setJumpBuff(int buff)
+    {
+        jump *= buff;
+        jump_buff = true;
+        jump_buff_obj.SetActive(true);
+    }
+
+    public void resetJumpBuff(float init)
+    {
+        jump = init;
+        jump_buff = false;
+        jump_buff_obj.SetActive(false);
+    }
+
+    public void setSpeedBuff(int buff)
+    {
+        runSpeed *= buff;
+        speed_buff = true;
+        speed_buff_obj.SetActive(true);
+        animator.SetFloat("speedRun" , 2.0f);
+        
+    }
+
+    public void resetSpeedBuff(float init)
+    {
+        runSpeed = init;
+        speed_buff = false;
+        speed_buff_obj.SetActive(false);
+        animator.SetFloat("speedRun", 1.0f);
     }
 
     void randomLook()
@@ -60,7 +98,7 @@ public class Movement : MonoBehaviour
         IsDead = b;
     }
 
-    float calculate_speedByscore()
+    public float calculate_speedByscore()
     {
         return (scoreManager.instance.score > 0.0f ? scoreManager.instance.score : 1.0f) / 1000.0f;
     }
@@ -70,16 +108,19 @@ public class Movement : MonoBehaviour
 
         transform.Translate(Vector3.forward * (runSpeed + calculate_speedByscore()) * Time.deltaTime);
 
-        //jump Up
-        if (Input.GetKeyDown(KeyCode.Space) && IsGround && !IsSlide)
+        if (!speed_buff)
         {
-            rb.AddForce(Vector3.up * jump ,ForceMode.Impulse);
-        }
+            //jump Up
+            if (Input.GetKeyDown(KeyCode.Space) && IsGround)
+            {
+                rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+            }
 
-        //jump Down
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !IsGround)
-        {
-            rb.AddForce(Vector3.down * jump * 2, ForceMode.Impulse);
+            //jump Down
+            if (Input.GetKeyDown(KeyCode.LeftControl) && !IsGround)
+            {
+                rb.AddForce(Vector3.down * jump * 2, ForceMode.Impulse);
+            }
         }
 
         //Slide

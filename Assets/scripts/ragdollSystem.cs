@@ -83,6 +83,8 @@ public class ragdollSystem : MonoBehaviour
 
         movement.setDead(true);
 
+        scoreManager.instance.IsDead();
+
         foreach (CinemachineTargetGroup item in targetGroup)
         {
             item.m_Targets[0].weight = 0;
@@ -92,6 +94,11 @@ public class ragdollSystem : MonoBehaviour
         foreach (Rigidbody item in rigidbodies)
         {
             item.useGravity = true;
+            if (item.velocity.magnitude != 0)
+            {
+                Vector3 dampeningDirection = item.velocity.normalized * -1.0f;
+                item.AddForce(dampeningDirection * 10.0f);
+            }
         }
 
         foreach (BoxCollider item in boxColliders)

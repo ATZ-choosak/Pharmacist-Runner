@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class randomBox : MonoBehaviour
 {
-    enum Type {box , police_stand};
+    enum Type {box , police_stand , item_boot};
 
     [SerializeField]
     private List<Vector3> pointSpawn = new List<Vector3>();
@@ -18,6 +18,11 @@ public class randomBox : MonoBehaviour
     void Start()
     {
         int random_box_count = randomLength(4);
+
+        if (type == Type.item_boot)
+        {
+            random_box_count = randomLength(10) % 4 == 0 ? 1 : 0;
+        }
 
         List<Vector3> pointSpawn_clone = pointSpawn;
 
